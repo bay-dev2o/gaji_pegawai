@@ -1,0 +1,21 @@
+{
+  "name": "gaji-pegawai-pwa",
+  "version": "1.0.0",
+  "description": "Aplikasi CRUD Gaji Pegawai berbasis Progressive Web App",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pwa",
+    "employee",
+    "salary",
+    "crud"
+  ],
+  "author": "Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}

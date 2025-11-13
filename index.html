@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FF6B35">
+    <title>Gaji Pegawai</title>
+    <meta name="description" content="Aplikasi CRUD Gaji Pegawai PWA">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" href="icons/icon-192x192.svg" sizes="192x192" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.svg">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/style.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Gaji Pegawai</h1>
+    </header>
+    
+    <main>
+        <section class="form-section">
+            <form id="employee-form">
+                <div class="form-group">
+                    <label for="nama">Nama:</label>
+                    <input type="text" id="nama" name="nama" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nik">NIK:</label>
+                    <input type="text" id="nik" name="nik" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="golongan">Golongan:</label>
+                    <select id="golongan" name="golongan" required>
+                        <option value="">Pilih Golongan</option>
+                        <option value="IIIA">IIIA</option>
+                        <option value="IIIB">IIIB</option>
+                        <option value="IIIC">IIIC</option>
+                        <option value="IIID">IIID</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gaji-pokok">Gaji Pokok:</label>
+                    <input type="number" id="gaji-pokok" name="gaji-pokok" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status-keluarga">Status Keluarga:</label>
+                    <select id="status-keluarga" name="status-keluarga" required>
+                        <option value="">Pilih Status</option>
+                        <option value="Nikah">Nikah</option>
+                        <option value="Tidak Menikah">Tidak Menikah</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tunjangan-keluarga">Tunjangan Keluarga:</label>
+                    <input type="number" id="tunjangan-keluarga" name="tunjangan-keluarga" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="jumlah-anak">Jumlah Anak:</label>
+                    <select id="jumlah-anak" name="jumlah-anak" disabled>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tunjangan-anak">Tunjangan Anak:</label>
+                    <input type="number" id="tunjangan-anak" name="tunjangan-anak" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="jabatan">Jabatan:</label>
+                    <select id="jabatan" name="jabatan" required>
+                        <option value="">Pilih Jabatan</option>
+                        <option value="Asisten Ahli">Asisten Ahli</option>
+                        <option value="Lektor">Lektor</option>
+                        <option value="Lektor Kepala">Lektor Kepala</option>
+                        <option value="Guru Besar">Guru Besar</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tunjangan-jabatan">Tunjangan Jabatan:</label>
+                    <input type="number" id="tunjangan-jabatan" name="tunjangan-jabatan" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gaji-bersih">Gaji Bersih:</label>
+                    <input type="number" id="gaji-bersih" name="gaji-bersih" readonly>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" id="simpan-btn">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
+                        </svg>
+                        Simpan
+                    </button>
+                </div>
+            </form>
+        </section>
+        
+        <section class="data-section">
+            <div class="section-header">
+                <h2>Daftar Pegawai</h2>
+                <button id="export-btn" class="btn-icon">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/>
+                    </svg>
+                    Ekspor
+                </button>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Cari pegawai...">
+            </div>
+            
+            <div id="employee-list" class="employee-grid">
+                <!-- Employee cards will be rendered here -->
+            </div>
+            
+            <div id="pagination" class="pagination">
+                <!-- Pagination controls will be rendered here -->
+            </div>
+        </section>
+    </main>
+    
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+    
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content">
+            <h3>Konfirmasi</h3>
+            <p>Apakah Anda yakin ingin menghapus data ini?</p>
+            <div class="modal-actions">
+                <button id="confirm-no" class="btn-secondary">Batal</button>
+                <button id="confirm-yes" class="btn-danger">Hapus</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Report Modal -->
+    <div id="report-modal" class="modal">
+        <div class="modal-content">
+            <h3>Laporan Rekap Gaji</h3>
+            <div id="report-content">
+                <!-- Report content will be rendered here -->
+            </div>
+            <div class="modal-actions">
+                <button id="print-report" class="btn-primary">Cetak</button>
+                <button id="close-report" class="btn-secondary">Tutup</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Indicator -->
+    <div id="loading-indicator" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- Scripts -->
+    <script type="module" src="src/db.js"></script>
+    <script type="module" src="src/utils.js"></script>
+    <script type="module" src="src/ui.js"></script>
+    <script type="module" src="src/app.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
